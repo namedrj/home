@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./3.css">
+</head>
+
+<body>
+  <div id="app">
+    <ul class="">
+      <list v-for="(item, index) in bianju" :key="index" :item="item" class="btn-blue"></list>
+    </ul>
+    <ul class="">
+      <list v-for="(item, index) in daoyan" :key="index" :item="item" :class="{'btn-blue': isEven(index)}"></list>
+    </ul>
+    <ul class="">
+      <list v-for="(item, index) in yanyuan" :key="index" :item="item" class=""></list>
+    </ul>
+
+    <ul>
+      <block v-for="(item, index) in films" :key="index" :item="item"></block>
+    </ul>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  <script>
+    Vue.component('list', {
+      props: {
+        item: {}
+      },
+      template: `<li>{{item}}</li>`
+    })
+
+    Vue.component('block', {
+      props: {
+        item: {}
+      },
+      template: `
+      <li>
+        <h4>剧名</h4>
+        <p>嘻嘻嘻</p>
+        <h4>主演</h4>
+        <p>哈哈哈</p>
+      </li>
+      `
+    })
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        title: "标题",
+        flag: true,
+        bianju: ['编剧', '鲁班', '貂蝉', '吕布', '上官', '关羽', '刘备', '张飞', '赵云', '马超', '夏侯惇'],
+        daoyan: ['导演', '鲁班', '貂蝉', '吕布', '上官', '关羽', '刘备', '张飞', '赵云', '马超', '夏侯惇'],
+        yanyuan: ['演员', '鲁班', '貂蝉', '吕布', '上官', '关羽', '刘备', '张飞', '赵云', '马超', '夏侯惇'],
+        films: ['演员', '鲁班', '貂蝉', '吕布', '上官', '关羽', '刘备', '张飞', '赵云', '马超', '夏侯惇']
+      },
+      methods: {
+        isEven: function (i) {
+          return i % 2 == 0 ? 1 : 0;
+        }
+      }
+    })
+     
+  </script>
+</body>
+
+</html>
