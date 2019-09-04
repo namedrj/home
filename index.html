@@ -102,7 +102,7 @@
                 <span class="sort">排序:</span>
                 <ul>
                     {{each category}}
-                    <li class="cate">{{$value}}</li>
+                    <li class="cate{{$index}}">{{$value}}</li>
                     {{/each}}
                 </ul>
                 <div class="choose"><i class="check"></i><span class="">已选中 {{len}} 部影片</span></div>
@@ -138,6 +138,30 @@
 
         var html = template('tmp', { category: category, movies: movies, len: len });
         document.body.innerHTML = html;
+
+        var sortByName = JSON.parse(JSON.stringify(movies));
+        var sortByTime = JSON.parse(JSON.stringify(movies));
+        var sortByHot = JSON.parse(JSON.stringify(movies));
+        var sortByScore = JSON.parse(JSON.stringify(movies));
+        var sort0 = sortByName.sort(function(a, b) {
+            return a.name - b.name;
+        });
+        var sort1 = sortByName.sort(function(a, b) {
+            return a.time - b.time;
+        });
+        var sort2 = sortByHot.sort(function(a, b) {
+            return a.hot - b.hot;
+        });
+        var sort3 = sortByScore.sort(function(a, b) {
+            return a.score - b.score;
+        });
+
+        // console.log();
+        for (let i = 0; i < category.length; i++) {
+            document.querySelector('.cate' + i).addEventListener('click', function() {
+                document.body.innerHTML = template('tmp', { category: category, movies: 'sort' + i });
+            })
+        }
     </script>
 </body>
 
