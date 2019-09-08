@@ -13,17 +13,19 @@ module.exports = {
             title: 'Production',
             template: './src/index.html'
         }),
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
     ],
     output: {
         filename: '[name].bundle.js',
+        chunkFilename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
     resolve: {
         // 将 `.ts` 添加为一个可解析的扩展名。
         extensions: ['.ts', '.js'],
         alias: {
-            'vue$': 'vue/dist/vue.esm.js'
+            'vue$': 'vue/dist/vue.esm.js',
+            '@': path.resolve('src')
         }
     },
     module: {
@@ -56,11 +58,18 @@ module.exports = {
                 use: [
                     'vue-style-loader',
                     'css-loader',
+                    'sass-loader'
+                ]
+            },
+            {
+                test: /\.sass$/,
+                use: [
+                    'vue-style-loader',
+                    'css-loader',
                     {
                         loader: 'sass-loader',
                         options: {
-                            // 你也可以从一个文件读取，例如 `variables.scss`
-                            data: `$color: red;`
+                            indentedSyntax: true
                         }
                     }
                 ]
